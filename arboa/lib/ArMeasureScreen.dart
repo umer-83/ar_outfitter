@@ -10,6 +10,7 @@ class ArMeasurementScreen extends StatefulWidget {
 
 class _ArMeasurementScreenState extends State<ArMeasurementScreen>
 {
+  bool loading = false;
   ARKitController arkitController;
   ARKitPlane plane;
   ARKitNode node;
@@ -23,7 +24,40 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen>
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(backgroundColor: Colors.white,
-      title: Text("Sizes", style: TextStyle(color: Colors.black),),),
+      title: Text("Sizes", style: TextStyle(color: Colors.black),),
+      actions: [
+          Container(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  height: 35,
+                  margin: EdgeInsets.only(right: 10),
+                  child: ElevatedButton(
+                      onPressed: OnAdd,
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                          onPrimary: Colors.grey.shade400,
+                          onSurface: Colors.grey.shade50,
+                          shadowColor: Colors.white,
+                          padding: EdgeInsets.all(5),
+                          elevation: 0),
+                      child: loading
+                          ? SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2.0,
+                              ))
+                          : Text('SAVE',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500)))),
+            ],
+          ))
+        ],
+        elevation: 4,
+      ),
     body: Container(
       child: ARKitSceneView(
         showFeaturePoints: true,
@@ -34,6 +68,7 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen>
     
     ),
     
+
 bottomNavigationBar: BottomNavigationBar(
         currentIndex: 2,
         onTap: onChangeNavigation,
@@ -69,6 +104,7 @@ bottomNavigationBar: BottomNavigationBar(
         child: const Icon(Icons.add),
   ),
   );
+  
   
 
 
@@ -222,6 +258,26 @@ bottomNavigationBar: BottomNavigationBar(
     } else if (index == 3) {
       Navigator.pushReplacementNamed(context, '/login');
     }
+  }
+  void OnAdd() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            color: Color(0xFF737373),
+            height: 180,
+            child: Container(
+              //child: _buildBottomNavigationMenu(),
+              decoration: BoxDecoration(
+                color: Theme.of(context).canvasColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(10),
+                  topRight: const Radius.circular(10),
+                ),
+              ),
+            ),
+          );
+        });
   }
   
 }
