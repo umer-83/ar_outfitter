@@ -1,3 +1,5 @@
+// ignore_for_file: missing_return
+
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Color(0xFFFFFFFF),
       body: SafeArea(
           child: Padding(
-              padding: EdgeInsetsDirectional.all(15),
+              padding: EdgeInsetsDirectional.all(25),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -23,22 +25,16 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image(
-                          image: AssetImage('images/yoboi.png'),
-                          width: 100,
-                          height: 100),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'ARBOA',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      )
+                          image: AssetImage('images/ARBOA-logos_transparent.png'),
+                          width: 200,
+                          height: 200),
+                      /*SizedBox(
+                        width: ,
+                      ),*/
+                      
                     ],
                   ),
-                  SizedBox(height: 50),
+                  //SizedBox(height: 5),
                   Text('Welcome!',
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.w700)),
@@ -104,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                                 Navigator.pushReplacementNamed(
                                     context, '/home');
                               },
-                              child: Text("Login"),
+                              child: Text("Login", style: TextStyle(fontSize: 14),),
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all<Color>(

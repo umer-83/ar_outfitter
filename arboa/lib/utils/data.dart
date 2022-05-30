@@ -3,7 +3,7 @@
 List<Map<String, dynamic>> data = [
   {
     "id": '1',
-    "company_name": "Gringa Sewing",
+    "company_name": "Outfitters",
     "services": "Sewing, Stitching, Embroidery",
     "cover_image":
         "https://images.unsplash.com/photo-1592169138776-7c9211066fc8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80",
