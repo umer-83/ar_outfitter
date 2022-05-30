@@ -22,11 +22,17 @@ dependencies:
   image_picker: ^0.8.4+11
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.9.2"
   flutter_test:
     sdk: flutter
 
   arkit_plugin:
     path: ../
+  
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "arboa/images/ARBOA-logos_transparent.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -41,6 +47,7 @@ flutter:
     - .env
     - images/yoboi.png
     - images/marker.png
+    - images/ARBOA-logos_transparent.png
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:

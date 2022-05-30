@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:arkit_plugin/arkit_plugin.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
@@ -49,7 +50,7 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen>
                               child: CircularProgressIndicator(
                                 strokeWidth: 2.0,
                               ))
-                          : Text('SAVE',
+                          : Text('Add',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500)))),
@@ -261,23 +262,100 @@ bottomNavigationBar: BottomNavigationBar(
   }
   void OnAdd() {
     showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+        backgroundColor: Colors.white,
         context: context,
-        builder: (context) {
-          return Container(
-            color: Color(0xFF737373),
-            height: 180,
-            child: Container(
-              //child: _buildBottomNavigationMenu(),
-              decoration: BoxDecoration(
-                color: Theme.of(context).canvasColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: const Radius.circular(10),
-                  topRight: const Radius.circular(10),
-                ),
+        isScrollControlled: true,
+        builder: (context) => Padding(
+          padding: const EdgeInsets.symmetric(horizontal:20 ),
+          child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  
+                  SizedBox(height: 3),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: TextFormField(
+                          style: TextStyle(fontSize: 14),
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  borderSide:
+                                      BorderSide(color: Colors.blue, width: 2)),
+                              contentPadding:
+                                EdgeInsets.fromLTRB(15, 15, 15, 15),
+                              labelText: 'Half Chest',
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  borderSide: BorderSide(
+                                      color: Colors.blue, width: 2))),
+                          
+                        ),
+                        
+                        
+                  ),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: TextFormField(
+                          style: TextStyle(fontSize: 14),
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  borderSide:
+                                      BorderSide(color: Colors.blue, width: 2)),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(15, 15, 15, 15),
+                              labelText: 'Half Chest',
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  borderSide: BorderSide(
+                                      color: Colors.blue, width: 2))),
+                          
+                        ),
+                  ),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: TextFormField(
+                          style: TextStyle(fontSize: 14),
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  borderSide:
+                                      BorderSide(color: Colors.blue, width: 2)),
+                              contentPadding:
+                                EdgeInsets.fromLTRB(15, 15, 15, 15),
+                              labelText: 'Half Chest 1',
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  borderSide: BorderSide(
+                                      color: Colors.blue, width: 2))),
+                          
+                        ),
+                  ),
+
+                  SizedBox(height: 5),
+                  ListTile(
+                            leading: Icon(Icons.save),
+                            title: Text('Save'),
+                            //onTap: (),
+                          ),
+                ],
               ),
-            ),
-          );
-        });
+        
+    ),);
   }
   
 }
