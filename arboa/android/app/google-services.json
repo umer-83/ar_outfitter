@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "229436930851",
+    "project_id": "ar-outfitter-app",
+    "storage_bucket": "ar-outfitter-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229436930851:android:f94c8660bbe3e07e79ea96",
+        "android_client_info": {
+          "package_name": "com.umer.arboa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229436930851-eten1u6u37aet6q8l9pd33cu3v5dtt7r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX8U0uQSnIW3U1NZPEkhBS8TWP33kUV8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229436930851-eten1u6u37aet6q8l9pd33cu3v5dtt7r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

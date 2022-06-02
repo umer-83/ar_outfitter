@@ -27,20 +27,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image(
-                      image: AssetImage('images/yoboi.png'),
-                      width: 100,
-                      height: 100,
+                      image: AssetImage('images/ARBOA-logos_transparent.png'),
+                      width: 200,
+                      height: 200,
                     ),
                     SizedBox(
                       width: 15,
                     ),
-                    Text(
-                      'ARBOA',
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
-                    )
+                    
                   ],
                 ),
                 SizedBox(height: 50),

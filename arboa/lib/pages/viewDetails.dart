@@ -41,7 +41,7 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                 height: 350,
                 child: Stack(
                   children: [
-                    Image.network(widget.currentItem.cover_image,
+                    Image.asset(widget.currentItem.cover_image,
                         width: double.maxFinite,
                         fit: BoxFit.cover,
                         height: 350),
@@ -107,7 +107,7 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                     SizedBox(
                       height: 20,
                     ),
-                    Text("Tailoress Contact",
+                    Text("Brand Contact",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500)),
                     Text(widget.currentItem.address,
@@ -133,7 +133,7 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                         (index) => new Container(
                           width: 100,
                           height: 100,
-                          child: Image.network(
+                          child: Image.asset(
                             widget.currentItem.portfolio[index],
                             width: double.maxFinite,
                             fit: BoxFit.cover,
@@ -176,7 +176,7 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
                                           const Text(
-                                              'Please provide your opinion about the tailoress',
+                                              'Please provide your opinion about the Brand',
                                               style: TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.w600)),

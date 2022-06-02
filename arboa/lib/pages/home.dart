@@ -9,8 +9,7 @@ class HomePage extends StatefulWidget {
   final String title;
   final List<ServiceCardData> data;
 
-  const HomePage({Key key, this.title, this.data})
-      : super(key: key);
+  const HomePage({Key key, this.title, this.data}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -66,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text('Find nearby Tailors',
+                      Text('Find Nearby Brands',
                           style: TextStyle(
                               fontSize: 28, fontWeight: FontWeight.bold))
                     ],
@@ -96,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(fontSize: 13),
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(15, 8, 15, 8),
-                            hintText: 'Search Tailors',
+                            hintText: 'Search Brands',
                             border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
@@ -119,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                           print(controller.text);
+                          print(controller.text);
                         },
                         child: Container(
                           width: 45,
@@ -215,7 +214,7 @@ Widget SearchedCards(context, ServiceCardData currentItem) {
         children: [
           Container(
             color: Colors.blue.shade100,
-            child: Image.network(
+            child: Image.asset(
               currentItem.cover_image,
               width: double.infinity,
               height: 120,
