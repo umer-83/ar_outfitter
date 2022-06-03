@@ -4,6 +4,7 @@ import 'package:ar_outfitter/pages/mapResponse.dart';
 import 'package:ar_outfitter/pages/viewDetails.dart';
 import 'package:ar_outfitter/utils/data.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -44,6 +45,8 @@ class _HomePageState extends State<HomePage> {
     } else if (index == 2) {
       Navigator.pushReplacementNamed(context, '/size');
     } else if (index == 3) {
+      Navigator.pushReplacementNamed(context, '/details');
+    }else if (index == 4) {
       Navigator.pushReplacementNamed(context, '/login');
     }
   }
@@ -184,13 +187,16 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_add),
-            label: 'Service Profile',
+            label: 'Add Profile',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.boy_rounded),
             label: 'Sizes',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.description_outlined),
+            label: 'Details',
+          ),BottomNavigationBarItem(
             icon: Icon(Icons.logout),
             label: 'Logout',
           ),

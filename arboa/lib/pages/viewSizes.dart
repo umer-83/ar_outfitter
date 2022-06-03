@@ -1,127 +1,84 @@
+import 'package:ar_outfitter/utils/data_tiles.dart';
+import 'package:ar_outfitter/main.dart';
+import 'package:ar_outfitter/model/model_tiles.dart';
+import 'package:ar_outfitter/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 
-void main() => runApp(new MyApp());
-
-// create a global saved set
-Set<WordPair> savedGlobal = new Set<WordPair>();
-
-class MyApp extends StatelessWidget {
+class AdvancedTilePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Startup Name Generator',
-      home: new RandomWords(),
-    );
-  }
+  _AdvancedTilePageState createState() => _AdvancedTilePageState();
 }
 
-class RandomWords extends StatefulWidget {
+class _AdvancedTilePageState extends State<AdvancedTilePage> {
   @override
-  RandomWordsState createState() => new RandomWordsState();
-}
-
-class RandomWordsState extends State<RandomWords> {
-  final List<WordPair> _suggestions = <WordPair>[];
-  final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
-
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: const Text('Startup Name Generator'),
-        actions: <Widget>[
-          // change the onPressed function
-          new IconButton(icon: const Icon(Icons.list), onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailPage()
-              )
-            );
-          }),
-        ],
-      ),
-      body: _buildSuggestions(),
-    );
-  }
-
-  Widget _buildSuggestions() {
-    return new ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      itemBuilder: (BuildContext _context, int i) {
-        if (i.isOdd) {
-          return const Divider();
-        }
-        final int index = i ~/ 2;
-        if (index >= _suggestions.length) {
-          _suggestions.addAll(generateWordPairs().take(10));
-        }
-        return _buildRow(_suggestions[index]);
-      });
-  }
-
-  Widget _buildRow(WordPair pair) {
-    final bool alreadySaved = savedGlobal.contains(pair);
-
-    return new ListTile(
-      title: new Text(
-        pair.asPascalCase,
-        style: _biggerFont,
-      ),
-      trailing: new Icon(
-        alreadySaved ? Icons.favorite : Icons.favorite_border,
-        color: alreadySaved ? Colors.red : null,
-      ),
-      onTap: () {
-        setState(() {
-          if (alreadySaved) {
-            savedGlobal.remove(pair);
-          } else {
-            savedGlobal.add(pair);
-          }
-        });
-      },
-    );
-  }
-}
-
-// add a new stateful page
-class DetailPage extends StatefulWidget {
-  @override
-  _DetailPageState createState() => _DetailPageState();
-}
-
-class _DetailPageState extends State<DetailPage> {
-  final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
-
-  @override
-  Widget build(BuildContext context) {
-
-    Iterable<ListTile> tiles = savedGlobal.map((WordPair pair) {
-      return new ListTile(
-        onLongPress: () {
-          setState(() {
-            savedGlobal.remove(pair);
-          });
-        },
-        title: new Text(
-          pair.asPascalCase,
-          style: _biggerFont,
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(backgroundColor: Colors.white,
+         title: Text("Sizes Detail", style: TextStyle(color: Colors.black),),
+     
+          centerTitle: true,
         ),
-      );
-    });
+        body: SingleChildScrollView(
+          child: ExpansionPanelList.radio(
+            expansionCallback: (index, isExpanded) {
+              final tile = advancedTiles[index];
+              setState(() => tile.isExpanded = isExpanded);
 
-    final List<Widget> divided = ListTile.divideTiles(
-      context: context,
-      tiles: tiles,
-    ).toList();
-
-    return new Scaffold(
-      appBar: new AppBar(
-        title: const Text('Saved Suggestions'),
+            },
+            children: advancedTiles
+                .map((tile) => ExpansionPanelRadio(
+                      value: tile.title,
+                      canTapOnHeader: true,
+                      headerBuilder: (context, isExpanded) => buildTile(tile),
+                      body: Column(
+                        children: tile.tiles.map(buildTile).toList(),
+                      ),
+                    ))
+                .toList(),
+          ),
+        ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 3,
+        onTap: onChangeNavigation,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_add),
+            label: 'Add Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.boy_rounded),
+            label: 'Sizes',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.description_outlined),
+            label: 'Details',
+          ),BottomNavigationBarItem(
+            icon: Icon(Icons.logout),
+            label: 'Logout',
+          ),
+        ],
+        selectedItemColor: Colors.blue,
       ),
-      body: new ListView(children: divided),
-    );
+      );
+
+  Widget buildTile(AdvancedTile tile) => ListTile(
+        leading: tile.icon != null ? Icon(tile.icon) : null,
+        title: Text(tile.title),
+      
+      );
+void onChangeNavigation(int index) {
+    if (index == 0) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else if (index == 1) {
+      Navigator.pushReplacementNamed(context, '/addService');
+    } else if (index == 2) {
+      Navigator.pushReplacementNamed(context, '/size');
+    } else if (index == 4) {
+      Navigator.pushReplacementNamed(context, '/login');
+    }
   }
 }

@@ -5,16 +5,12 @@ import 'package:ar_outfitter/utils/data.dart';
 import 'package:uuid/uuid.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 class ServiceAddPage extends StatefulWidget {
   final bool initialized;
   final bool error;
   final Function addNewService;
   const ServiceAddPage(
-      {Key key,
-      this.initialized,
-      this.error,
-      this.addNewService})
+      {Key key, this.initialized, this.error, this.addNewService})
       : super(key: key);
 
   @override
@@ -131,6 +127,8 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
     } else if (index == 2) {
       Navigator.pushReplacementNamed(context, '/size');
     } else if (index == 3) {
+      Navigator.pushReplacementNamed(context, '/details');
+    } else if (index == 4) {
       Navigator.pushReplacementNamed(context, '/login');
     }
   }
@@ -410,6 +408,9 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.boy_sharp),
             label: 'Sizes',
+          ),BottomNavigationBarItem(
+            icon: Icon(Icons.description_outlined),
+            label: 'Details',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.logout),

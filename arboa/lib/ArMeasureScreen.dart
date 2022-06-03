@@ -9,8 +9,7 @@ class ArMeasurementScreen extends StatefulWidget {
   _ArMeasurementScreenState createState() => _ArMeasurementScreenState();
 }
 
-class _ArMeasurementScreenState extends State<ArMeasurementScreen>
-{
+class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
   bool loading = false;
   ARKitController arkitController;
   ARKitPlane plane;
@@ -20,122 +19,119 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen>
   Matrix4 transform;
 
   ARKitController get controller => null;
-  
-  
+
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(backgroundColor: Colors.white,
-      title: Text("Sizes", style: TextStyle(color: Colors.black),),
-      actions: [
-          Container(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                  height: 35,
-                  margin: EdgeInsets.only(right: 10),
-                  child: ElevatedButton(
-                      onPressed: OnAdd,
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.blue,
-                          onPrimary: Colors.grey.shade400,
-                          onSurface: Colors.grey.shade50,
-                          shadowColor: Colors.white,
-                          padding: EdgeInsets.all(5),
-                          elevation: 0),
-                      child: loading
-                          ? SizedBox(
-                              width: 16,
-                              height: 16,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2.0,
-                              ))
-                          : Text('Add',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500)))),
-            ],
-          ))
-        ],
-        elevation: 4,
-      ),
-    body: Container(
-      child: ARKitSceneView(
-        showFeaturePoints: true,
-        planeDetection: ARPlaneDetection.vertical,
-        onARKitViewCreated: onARKitViewCreated,
-        enableTapRecognizer: true,
-      ),
-    
-    ),
-    
-
-bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 2,
-        onTap: onChangeNavigation,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text(
+            "Sizes",
+            style: TextStyle(color: Colors.black),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_add),
-            label: 'Service Profile',
+          actions: [
+            Container(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    height: 35,
+                    margin: EdgeInsets.only(right: 10),
+                    child: ElevatedButton(
+                        onPressed: OnAdd,
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.blue,
+                            onPrimary: Colors.grey.shade400,
+                            onSurface: Colors.grey.shade50,
+                            shadowColor: Colors.white,
+                            padding: EdgeInsets.all(5),
+                            elevation: 0),
+                        child: loading
+                            ? SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2.0,
+                                ))
+                            : Text('Add',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500)))),
+              ],
+            ))
+          ],
+          elevation: 4,
+        ),
+        body: Container(
+          child: ARKitSceneView(
+            showFeaturePoints: true,
+            planeDetection: ARPlaneDetection.vertical,
+            onARKitViewCreated: onARKitViewCreated,
+            enableTapRecognizer: true,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.boy_sharp),
-            label: 'Sizes',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.logout),
-            label: 'Logout',
-          ),],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: 2,
+          onTap: onChangeNavigation,
+          type: BottomNavigationBarType.fixed,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_add),
+              label: 'Service Profile',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.boy_sharp),
+              label: 'Sizes',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.description_outlined),
+              label: 'Details',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.logout),
+              label: 'Logout',
+            ),
+          ],
           selectedItemColor: Colors.blue,
-          ),
-  
-  floatingActionButton: FloatingActionButton(
-        onPressed: (() {
-          lastPosition = null;
-          onARKitViewCreated(arkitController);
-             
-          _onPlaneTapHandler(transform);
-        }),
-        //tooltip: 'Increment',
-        child: const Icon(Icons.add),
-  ),
-  );
-  
-  
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (() {
+            lastPosition = null;
+            onARKitViewCreated(arkitController);
 
+            _onPlaneTapHandler(transform);
+          }),
+          //tooltip: 'Increment',
+          child: const Icon(Icons.add),
+        ),
+      );
 
-  void onARKitViewCreated(ARKitController arkitController)
-  {
+  void onARKitViewCreated(ARKitController arkitController) {
     this.arkitController = arkitController;
     this.arkitController.onAddNodeForAnchor = _handleAddAnchor;
     this.arkitController.onUpdateNodeForAnchor = _handleUpdateAnchor;
     this.arkitController.onARTap = (List<ARKitTestResult> ar) {
       final planeTap = ar.firstWhere(
-            (tap) => tap.type == ARKitHitTestResultType.existingPlaneUsingExtent,
+        (tap) => tap.type == ARKitHitTestResultType.existingPlaneUsingExtent,
         orElse: () => null,
       );
       if (planeTap != null) {
         _onPlaneTapHandler(planeTap.worldTransform);
-        
       }
     };
   }
 
-  void _handleAddAnchor(ARKitAnchor anchor)
-  {
+  void _handleAddAnchor(ARKitAnchor anchor) {
     if (!(anchor is ARKitPlaneAnchor)) {
       return;
     }
     _addPlane(arkitController, anchor);
   }
 
-  void _handleUpdateAnchor(ARKitAnchor anchor)
-  {
+  void _handleUpdateAnchor(ARKitAnchor anchor) {
     if (anchor.identifier != anchorId) {
       return;
     }
@@ -146,8 +142,7 @@ bottomNavigationBar: BottomNavigationBar(
     plane.height.value = planeAnchor.extent.z;
   }
 
-  void _addPlane(ARKitController controller, ARKitPlaneAnchor anchor)
-  {
+  void _addPlane(ARKitController controller, ARKitPlaneAnchor anchor) {
     anchorId = anchor.identifier;
     plane = ARKitPlane(
       width: anchor.extent.x,
@@ -168,8 +163,7 @@ bottomNavigationBar: BottomNavigationBar(
     controller.add(node, parentNodeName: anchor.nodeName);
   }
 
-  void _onPlaneTapHandler(Matrix4 transform)
-  {
+  void _onPlaneTapHandler(Matrix4 transform) {
     final position = vector.Vector3(
       transform.getColumn(3).x,
       transform.getColumn(3).y,
@@ -177,25 +171,24 @@ bottomNavigationBar: BottomNavigationBar(
     );
     final material = ARKitMaterial(
       lightingModelName: ARKitLightingModel.constant,
-      diffuse:
-      ARKitMaterialProperty(color:  Colors.redAccent),
+      diffuse: ARKitMaterialProperty(color: Colors.redAccent),
     );
     final sphere = ARKitSphere(
       radius: 0.003,
       materials: [material],
     );
     final node = ARKitNode(
-      geometry: sphere,   
+      geometry: sphere,
       position: position,
     );
-    
+
     arkitController.add(node);
-     if (lastPosition != null) {
+    if (lastPosition != null) {
       final line = ARKitLine(
         fromVector: lastPosition,
         toVector: position,
       );
-      final lineNode = ARKitNode(geometry: line  );
+      final lineNode = ARKitNode(geometry: line);
       arkitController.add(lineNode);
 
       final distance = _calculateDistanceBetweenPoints(position, lastPosition);
@@ -203,22 +196,18 @@ bottomNavigationBar: BottomNavigationBar(
       _drawText(distance, point);
     }
     lastPosition = position;
-    
   }
 
-  String _calculateDistanceBetweenPoints(vector.Vector3 A, vector.Vector3 B)
-  {
+  String _calculateDistanceBetweenPoints(vector.Vector3 A, vector.Vector3 B) {
     final length = A.distanceTo(B);
-    return '${(length * 100).toStringAsFixed(2)} cm/${(length * 100/2.54).toStringAsFixed(2)} inch';
+    return '${(length * 100).toStringAsFixed(2)} cm/${(length * 100 / 2.54).toStringAsFixed(2)} inch';
   }
 
-  vector.Vector3 _getMiddleVector(vector.Vector3 A, vector.Vector3 B)
-  {
+  vector.Vector3 _getMiddleVector(vector.Vector3 A, vector.Vector3 B) {
     return vector.Vector3((A.x + B.x) / 2, (A.y + B.y) / 2, (A.z + B.z) / 2);
   }
 
-  void _drawText(String text, vector.Vector3 point)
-  {
+  void _drawText(String text, vector.Vector3 point) {
     final textGeometry = ARKitText(
       text: text,
       extrusionDepth: 1,
@@ -251,113 +240,141 @@ bottomNavigationBar: BottomNavigationBar(
     });
     arkitController.add(node);
   }
+
   void onChangeNavigation(int index) {
     if (index == 0) {
       Navigator.pushReplacementNamed(context, '/home');
     } else if (index == 1) {
       Navigator.pushReplacementNamed(context, '/addService');
     } else if (index == 3) {
+      Navigator.pushReplacementNamed(context, '/details');
+    } else if (index == 4) {
       Navigator.pushReplacementNamed(context, '/login');
     }
   }
+
   void OnAdd() {
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
-        backgroundColor: Colors.white,
-        context: context,
-        isScrollControlled: true,
-        builder: (context) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal:20 ),
-          child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  
-                  SizedBox(height: 3),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: TextFormField(
-                          style: TextStyle(fontSize: 14),
-                          decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                  borderSide:
-                                      BorderSide(color: Colors.blue, width: 2)),
-                              contentPadding:
-                                EdgeInsets.fromLTRB(15, 15, 15, 15),
-                              labelText: 'Half Chest',
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                  borderSide: BorderSide(
-                                      color: Colors.blue, width: 2))),
-                          
-                        ),
-                        
-                        
-                  ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: TextFormField(
-                          style: TextStyle(fontSize: 14),
-                          decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                  borderSide:
-                                      BorderSide(color: Colors.blue, width: 2)),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(15, 15, 15, 15),
-                              labelText: 'Half Chest',
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                  borderSide: BorderSide(
-                                      color: Colors.blue, width: 2))),
-                          
-                        ),
-                  ),
-                  SizedBox(height: 5),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: TextFormField(
-                          style: TextStyle(fontSize: 14),
-                          decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                  borderSide:
-                                      BorderSide(color: Colors.blue, width: 2)),
-                              contentPadding:
-                                EdgeInsets.fromLTRB(15, 15, 15, 15),
-                              labelText: 'Half Chest 1',
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                  borderSide: BorderSide(
-                                      color: Colors.blue, width: 2))),
-                          
-                        ),
-                  ),
-
-                  SizedBox(height: 5),
-                  ListTile(
-                            leading: Icon(Icons.save),
-                            title: Text('Save'),
-                            //onTap: (),
-                          ),
-                ],
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+      backgroundColor: Colors.white,
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            SizedBox(height: 6),
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Column(
+                children: [ TextField(
+                  style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2)),
+                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                    labelText: 'Name:',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                ),
+                SizedBox(height: 6),
+                TextField(
+                  style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2)),
+                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                    labelText: 'Chest:',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                ),
+                SizedBox(height: 6),
+                TextField(
+                  style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2)),
+                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                    labelText: 'Shoulders:',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                ),
+                SizedBox(height: 6),
+                TextField(
+                  style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2)),
+                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                    labelText: 'Waist:',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                ),
+                SizedBox(height: 6),
+                TextField(
+                  style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2)),
+                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                    labelText: 'Shirt Length:',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                ),
+                SizedBox(height: 6),
+                TextField(
+                  style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2)),
+                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                    labelText: 'Sleeve Length:',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                ),
+                SizedBox(height: 6),
+                TextField(
+                  style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2)),
+                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                    labelText: 'Pant Length:',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                ),
+                 SizedBox(height: 5),
+            ListTile(
+              leading: Icon(Icons.save),
+              title: Text('Save'),
+              //onTap: (),
+            ),
+                ]
               ),
-        
-    ),);
+            ),
+          
+           
+          ],
+        ),
+      ),
+    );
   }
-  
 }
-
-
