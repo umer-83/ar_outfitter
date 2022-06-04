@@ -1,5 +1,5 @@
 // ignore_for_file: missing_return
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -10,6 +10,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +45,10 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: [
                         TextFormField(
+                          controller: _emailTextController,
+                          obscureText: false ,
+                          enableSuggestions: !false,
+                          autocorrect: !false,
                           style: TextStyle(fontSize: 14),
                           decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
@@ -53,6 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                               contentPadding:
                                   EdgeInsets.fromLTRB(15, 15, 15, 15),
                               labelText: 'Email',
+                              prefixIcon: Icon(Icons.mail),
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(5)),
@@ -69,7 +76,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         TextFormField(
                           style: TextStyle(fontSize: 14),
+                          controller: _passwordTextController,
                           obscureText: true,
+                          enableSuggestions: !true,
+                          autocorrect: !true,
                           decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                   borderRadius:
@@ -79,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                               contentPadding:
                                   EdgeInsets.fromLTRB(15, 15, 15, 15),
                               labelText: 'Password',
+                              prefixIcon: Icon(Icons.lock),
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(5)),
@@ -96,9 +107,15 @@ class _LoginPageState extends State<LoginPage> {
                           height: 45,
                           child: ElevatedButton(
                               onPressed: () {
-                                FocusScope.of(context).unfocus();
-                                Navigator.pushReplacementNamed(
-                                    context, '/home');
+                                FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
+                          email: _emailTextController.text,
+                          password: _passwordTextController.text)
+                      .then((value) {
+                    Navigator.pushReplacementNamed(context, '/home' );
+                  }).onError((error, stackTrace) {
+                    print("Error ${error.toString()}");
+                  });
                               },
                               child: Text("Login", style: TextStyle(fontSize: 14),),
                               style: ButtonStyle(

@@ -1,3 +1,5 @@
+import 'package:flushbar/flushbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -8,6 +10,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _userNameTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +39,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(
                       width: 15,
                     ),
-                    
                   ],
                 ),
                 SizedBox(height: 50),
@@ -46,20 +50,25 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: Column(
                     children: [
                       TextFormField(
+                        controller: _userNameTextController,
+                        obscureText: false ,
+                        enableSuggestions: !false,
+                        autocorrect: !false,
                         style: TextStyle(fontSize: 14),
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(5)),
-                                borderSide: BorderSide(
-                                    color: Colors.blue, width: 2)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2)),
                             contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                             labelText: 'Username',
+                            prefixIcon: Icon(Icons.person),
                             border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(5)),
-                                borderSide: BorderSide(
-                                    color: Colors.blue, width: 2))),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2))),
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'Username is required';
@@ -70,20 +79,25 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: 20,
                       ),
                       TextFormField(
+                        controller: _emailTextController,
+                        obscureText: false ,
+                        enableSuggestions: !false,
+                        autocorrect: !false,
                         style: TextStyle(fontSize: 14),
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(5)),
-                                borderSide: BorderSide(
-                                    color: Colors.blue, width: 2)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2)),
                             contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                             labelText: 'Email',
+                            prefixIcon: Icon(Icons.mail),
                             border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(5)),
-                                borderSide: BorderSide(
-                                    color: Colors.blue, width: 2))),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2))),
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'Email is required';
@@ -94,16 +108,21 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: 20,
                       ),
                       TextFormField(
-                        style: TextStyle(fontSize: 14),
+                        controller: _passwordTextController,
                         obscureText: true,
+                        enableSuggestions: !true,
+                        autocorrect: !true,
+                        style: TextStyle(fontSize: 14),
+                        
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(5)),
-                                borderSide: BorderSide(
-                                    color: Colors.blue, width: 2)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2)),
                             contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                             labelText: 'Password',
+                            prefixIcon: Icon(Icons.lock),
                             border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(5)),
@@ -121,8 +140,18 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: 45,
                         child: ElevatedButton(
                             onPressed: () {
-                              FocusScope.of(context).unfocus();
-                              Navigator.pushReplacementNamed(context, '/home');
+                               FirebaseAuth.instance
+                      .createUserWithEmailAndPassword(
+                          email: _emailTextController.text,
+                          password: _passwordTextController.text).then((value) {
+                    print("Created New Account");
+                    FocusScope.of(context).unfocus();
+                    Navigator.pushReplacementNamed(context, '/home');
+                  }).onError((error, stackTrace) {
+                    print("Error ${error.toString()}");
+                     });
+
+                             
                             },
                             child: Text("Register"),
                             style: ButtonStyle(
@@ -133,7 +162,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                     RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(40.0),
-                                        side: BorderSide(color: Colors.blue))))),
+                                        side:
+                                            BorderSide(color: Colors.blue))))),
                       )
                     ],
                   ),

@@ -10,7 +10,10 @@ import 'pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
+  
   await dotenv.load(fileName: '.env');
+   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
