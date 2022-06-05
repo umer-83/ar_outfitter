@@ -1,6 +1,7 @@
 // ignore_for_file: missing_return
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -107,15 +108,18 @@ class _LoginPageState extends State<LoginPage> {
                           height: 45,
                           child: ElevatedButton(
                               onPressed: () {
-                                FirebaseAuth.instance
+                                try{
+                                  FirebaseAuth.instance
                       .signInWithEmailAndPassword(
                           email: _emailTextController.text,
                           password: _passwordTextController.text)
                       .then((value) {
-                    Navigator.pushReplacementNamed(context, '/home' );
-                  }).onError((error, stackTrace) {
-                    print("Error ${error.toString()}");
-                  });
+                    Navigator.pushReplacementNamed(context, '/home' );});
+                                } on FirebaseAuthException catch (error) {
+      Fluttertoast.showToast(msg: error.message,gravity: ToastGravity.TOP,);
+    }
+                                
+                  
                               },
                               child: Text("Login", style: TextStyle(fontSize: 14),),
                               style: ButtonStyle(
