@@ -23,7 +23,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
   List<File> workImageFile = [];
   final picker = ImagePicker();
 
-  //FirebaseStorage storage = FirebaseStorage.instance;
+  FirebaseStorage storage = FirebaseStorage.instance;
   TextEditingController company_name = TextEditingController();
   TextEditingController services = TextEditingController();
   TextEditingController address = TextEditingController();

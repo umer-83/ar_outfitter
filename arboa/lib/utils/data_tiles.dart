@@ -1,5 +1,7 @@
 import 'package:ar_outfitter/model/model_tiles.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 final advancedTiles = <AdvancedTile>[
   AdvancedTile(

@@ -133,7 +133,7 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                         (index) => new Container(
                           width: 100,
                           height: 100,
-                          child: Image.asset(
+                          child: Image.network(
                             widget.currentItem.portfolio[index],
                             width: double.maxFinite,
                             fit: BoxFit.cover,

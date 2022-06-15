@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 List<Map<String, dynamic>> data = [
-  {
+  /*{
     "id": '1',
     "company_name": "Outfitters",
     "services": "Shirts, T-shirts, Jeans",
@@ -95,21 +95,21 @@ List<Map<String, dynamic>> data = [
     "portfolio": [
       "images/outfitters.jpg"
     ]
-  }
+  }*/
 ];
 
-// class ListOfAllData {
-//   late List<ServiceCardData> data;
+/*class ListOfAllData {
+   late List<ServiceCardData> data;
 
-//   ListOfAllData();
+   ListOfAllData();
 
-//   ListOfAllData.fromList(List<Map<String, Object>> data) {
-//     for (int i = 0; i < data.length; i++) {
-//       final item = ServiceCardData.fromListToCardData(data[i]);
-//       data.add(item);
-//     }
-//   }
-// }
+   ListOfAllData.fromList(List<Map<String, Object>> data) {
+     for (int i = 0; i < data.length; i++) {
+       final item = ServiceCardData.fromListToCardData(data[i]);
+       data.add(item);
+     }
+   }
+ }*/
 
 class ServiceCardData {
   String id;

@@ -220,7 +220,7 @@ Widget SearchedCards(context, ServiceCardData currentItem) {
         children: [
           Container(
             color: Colors.blue.shade100,
-            child: Image.asset(
+            child: Image.network(
               currentItem.cover_image,
               width: double.infinity,
               height: 120,

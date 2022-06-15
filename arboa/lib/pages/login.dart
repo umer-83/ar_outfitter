@@ -115,8 +115,13 @@ class _LoginPageState extends State<LoginPage> {
                           password: _passwordTextController.text)
                       .then((value) {
                     Navigator.pushReplacementNamed(context, '/home' );});
-                                } on FirebaseAuthException catch (error) {
-      Fluttertoast.showToast(msg: error.message,gravity: ToastGravity.TOP,);
+                                } on FirebaseAuthException catch (e) {
+      if(e.message == 'There is no user record corresponding to this identifier. The user may have been deleted.'){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text( "Invalid e-mail address.")));
+      }else if(e.message == 'The password is invalid or the user does not have a password.'){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text( "Invalid password.")));
+      }
+      print(e.toString());
     }
                                 
                   
