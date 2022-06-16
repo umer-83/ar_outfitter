@@ -2,6 +2,7 @@ import 'package:ar_outfitter/utils/data_tiles.dart';
 import 'package:ar_outfitter/main.dart';
 import 'package:ar_outfitter/model/model_tiles.dart';
 import 'package:ar_outfitter/utils/utils.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AdvancedTilePage extends StatefulWidget {
@@ -10,14 +11,20 @@ class AdvancedTilePage extends StatefulWidget {
 }
 
 class _AdvancedTilePageState extends State<AdvancedTilePage> {
+       final Stream<QuerySnapshot> sizesStream =
+      FirebaseFirestore.instance.collection('sizes').snapshots();
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    return MaterialApp( 
+      home: Scaffold(
         appBar: AppBar(backgroundColor: Colors.white,
          title: Text("Sizes Detail", style: TextStyle(color: Colors.black),),
      
           centerTitle: true,
         ),
+        
         body: SingleChildScrollView(
+          
           child: ExpansionPanelList.radio(
             expansionCallback: (index, isExpanded) {
               final tile = advancedTiles[index];
@@ -63,7 +70,8 @@ class _AdvancedTilePageState extends State<AdvancedTilePage> {
         ],
         selectedItemColor: Colors.blue,
       ),
-      );
+      ));}
+      
 
   Widget buildTile(AdvancedTile tile) => ListTile(
         leading: tile.icon != null ? Icon(tile.icon) : null,

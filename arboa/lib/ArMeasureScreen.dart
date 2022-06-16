@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:arkit_plugin/arkit_plugin.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
@@ -19,8 +20,65 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
   Matrix4 transform;
 
   ARKitController get controller => null;
+  var name = "";
+  var chest = "";
+  var shoulders = "";
+  var waist = "";
+  var shirt = "";
+  var sleeve = "";
+  var pant = "";
+  // Create a text controller and use it to retrieve the current value
+  // of the TextField.
+  final nameController = TextEditingController();
+  final chestController = TextEditingController();
+  final shouldersController = TextEditingController();
+  final waistController = TextEditingController();
+  final shirtController = TextEditingController();
+  final sleeveController = TextEditingController();
+  final pantController = TextEditingController();
 
   @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    nameController.dispose();
+    chestController.dispose();
+    shouldersController.dispose();
+    waistController.dispose();
+    shirtController.dispose();
+    sleeveController.dispose();
+    pantController.dispose();
+
+    super.dispose();
+  }
+
+  clearText() {
+    nameController.clear();
+    chestController.clear();
+    shouldersController.clear();
+    waistController.clear();
+    shirtController.clear();
+    sleeveController.clear();
+    pantController.clear();
+  }
+
+  // Adding Student
+  CollectionReference sizes = FirebaseFirestore.instance.collection('sizes');
+
+  Future<void> addUser() {
+    return sizes
+        .add({
+          'name': name,
+          'chest': chest,
+          'shoulder': shoulders,
+          'waist': waist,
+          'shirt': shirt,
+          'sleeve': sleeve,
+          'pant': pant
+        })
+        .then((value) => print('User Added'))
+        .catchError((error) => print('Failed to Add user: $error'));
+  }
+
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -64,7 +122,7 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
         body: Container(
           child: ARKitSceneView(
             showFeaturePoints: true,
-            planeDetection: ARPlaneDetection.vertical,
+            planeDetection: ARPlaneDetection.horizontalAndVertical,
             onARKitViewCreated: onARKitViewCreated,
             enableTapRecognizer: true,
           ),
@@ -270,108 +328,130 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
             Padding(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: Column(
-                children: [ TextField(
+              child: Column(children: [
+                TextField(
+                  controller: nameController,
                   style: TextStyle(fontSize: 14),
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2)),
-                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                    labelText: 'Name:',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide: BorderSide(color: Colors.blue, width: 2)),
+                      contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                      labelText: 'Name:',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide:
+                              BorderSide(color: Colors.blue, width: 2))),
                 ),
                 SizedBox(height: 6),
                 TextField(
+                  controller: chestController,
                   style: TextStyle(fontSize: 14),
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2)),
-                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                    labelText: 'Chest:',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide: BorderSide(color: Colors.blue, width: 2)),
+                      contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                      labelText: 'Chest:',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide:
+                              BorderSide(color: Colors.blue, width: 2))),
                 ),
                 SizedBox(height: 6),
                 TextField(
+                  controller: shouldersController,
                   style: TextStyle(fontSize: 14),
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2)),
-                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                    labelText: 'Shoulders:',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide: BorderSide(color: Colors.blue, width: 2)),
+                      contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                      labelText: 'Shoulders:',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide:
+                              BorderSide(color: Colors.blue, width: 2))),
                 ),
                 SizedBox(height: 6),
                 TextField(
+                  controller: waistController,
                   style: TextStyle(fontSize: 14),
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2)),
-                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                    labelText: 'Waist:',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide: BorderSide(color: Colors.blue, width: 2)),
+                      contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                      labelText: 'Waist:',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide:
+                              BorderSide(color: Colors.blue, width: 2))),
                 ),
                 SizedBox(height: 6),
                 TextField(
+                  controller: shirtController,
                   style: TextStyle(fontSize: 14),
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2)),
-                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                    labelText: 'Shirt Length:',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide: BorderSide(color: Colors.blue, width: 2)),
+                      contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                      labelText: 'Shirt Length:',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide:
+                              BorderSide(color: Colors.blue, width: 2))),
                 ),
                 SizedBox(height: 6),
                 TextField(
+                  controller: sleeveController,
                   style: TextStyle(fontSize: 14),
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2)),
-                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                    labelText: 'Sleeve Length:',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide: BorderSide(color: Colors.blue, width: 2)),
+                      contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                      labelText: 'Sleeve Length:',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide:
+                              BorderSide(color: Colors.blue, width: 2))),
                 ),
                 SizedBox(height: 6),
                 TextField(
+                  controller: pantController,
                   style: TextStyle(fontSize: 14),
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2)),
-                    contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                    labelText: 'Pant Length:',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        borderSide: BorderSide(color: Colors.blue, width: 2))),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide: BorderSide(color: Colors.blue, width: 2)),
+                      contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                      labelText: 'Pant Length:',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide:
+                              BorderSide(color: Colors.blue, width: 2))),
                 ),
-                 SizedBox(height: 5),
-            ListTile(
-              leading: Icon(Icons.save),
-              title: Text('Save'),
-              //onTap: (),
+                SizedBox(height: 5),
+                ListTile(
+                  onTap: () {
+                    name = nameController.text;
+                    chest = chestController.text;
+                    shoulders = shirtController.text;
+                    waist = waistController.text;
+                    shirt = shirtController.text;
+                    sleeve = sleeveController.text;
+                    pant = pantController.text;
+                    addUser();
+                    clearText();
+                  },
+                  leading: Icon(Icons.save),
+                  title: Text('Save'),
+                  //onTap: (),
+                ),
+              ]),
             ),
-                ]
-              ),
-            ),
-          
-           
           ],
         ),
       ),
