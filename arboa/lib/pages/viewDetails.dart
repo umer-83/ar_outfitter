@@ -41,7 +41,7 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                 height: 350,
                 child: Stack(
                   children: [
-                    Image.asset(widget.currentItem.cover_image,
+                    Image.network(widget.currentItem.cover_image,
                         width: double.maxFinite,
                         fit: BoxFit.cover,
                         height: 350),
