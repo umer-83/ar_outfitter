@@ -51,10 +51,12 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
     }
   }
 
-  CollectionReference profile =
-      FirebaseFirestore.instance.collection('profile');
-
   Future OnSave() async {
+    var service = services.text;
+                        var phon = phone.text;
+                        var company_nam = company_name.text;
+                        var descripton = description.text;
+                        var addres = address.text;
     setState(() {
       loading = true;
     });
@@ -100,7 +102,22 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
         content: const Text('Successfully Saved.'),
       ),
     );
+    return sizes
+        .add({
+          'address': addres,
+          'company_name': company_nam,
+          'cover_image': cover_image.toString(),
+          'portfolio': portfolio.toList(),
+          'description': descripton,
+          'phone': phon,
+          'rating': 0.0,
+          'services': service,
+        })
+        .then((value) => print('User Added'))
+        .catchError((error) => print('Failed to Add user: $error'));
   }
+
+  CollectionReference sizes = FirebaseFirestore.instance.collection('profile');
 
   Future saveFileToFireBase(File file) async {
     if (file != null) {
@@ -117,10 +134,6 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
             .getDownloadURL();
 
         return fileUrl;
-        /*FirebaseFirestore fs = FirebaseFirestore.instance;
-        await fs.collection("profile").add(
-
-        );*/
       } on FirebaseException catch (e) {
         // e.g, e.code == 'canceled'
         print("errorsss => $e");
@@ -159,7 +172,10 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                   height: 35,
                   margin: EdgeInsets.only(right: 10),
                   child: ElevatedButton(
-                      onPressed: OnSave,
+                      onPressed: () {
+                        
+                        OnSave();
+                      },
                       style: ElevatedButton.styleFrom(
                           primary: Colors.blue,
                           onPrimary: Colors.grey.shade400,
