@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:ar_outfitter/utils/data.dart';
@@ -49,6 +50,9 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
       });
     }
   }
+
+  CollectionReference profile =
+      FirebaseFirestore.instance.collection('profile');
 
   Future OnSave() async {
     setState(() {
@@ -113,6 +117,10 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
             .getDownloadURL();
 
         return fileUrl;
+        /*FirebaseFirestore fs = FirebaseFirestore.instance;
+        await fs.collection("profile").add(
+
+        );*/
       } on FirebaseException catch (e) {
         // e.g, e.code == 'canceled'
         print("errorsss => $e");
@@ -408,7 +416,8 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.boy_sharp),
             label: 'Sizes',
-          ),BottomNavigationBarItem(
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.description_outlined),
             label: 'Details',
           ),
