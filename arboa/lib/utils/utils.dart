@@ -6,8 +6,8 @@ class Utils {
 
   static void showSnackBar(
     BuildContext context, {
-    @required String text,
-    @required Color color,
+    String text,
+    Color color,
   }) =>
       _show(
         context,
