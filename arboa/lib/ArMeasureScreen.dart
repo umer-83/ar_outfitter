@@ -274,7 +274,7 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
       extrusionDepth: 1,
       materials: [
         ARKitMaterial(
-          diffuse: ARKitMaterialProperty(color: Colors.red),
+          diffuse: ARKitMaterialProperty(color: Colors.amberAccent),
         )
       ],
     );
