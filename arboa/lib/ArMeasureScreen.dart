@@ -138,7 +138,7 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_add),
-              label: 'Service Profile',
+              label: 'Store Profile',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.boy_sharp),
@@ -156,12 +156,15 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
           selectedItemColor: Colors.blue,
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.blue,
           onPressed: (() {
             lastPosition = null;
             onARKitViewCreated(arkitController);
 
             _onPlaneTapHandler(transform);
           }),
+          
+                            
           //tooltip: 'Increment',
           child: const Icon(Icons.add),
         ),
@@ -229,7 +232,7 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
     );
     final material = ARKitMaterial(
       lightingModelName: ARKitLightingModel.constant,
-      diffuse: ARKitMaterialProperty(color: Colors.redAccent),
+      diffuse: ARKitMaterialProperty(color: Colors.amber),
     );
     final sphere = ARKitSphere(
       radius: 0.003,
