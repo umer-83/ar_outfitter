@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 10), () {
+    Timer(Duration(seconds: 5), () {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Routes()));
     });
@@ -58,7 +58,6 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 20,
             ),
             const SpinKitFadingCircle(
-              duration: Duration(seconds :10),
               color: Colors.black,
               size: 50.0,
             ),
