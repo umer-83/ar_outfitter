@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text('Find Nearby Brands',
+                      Text('Home',
                           style: TextStyle(
                               fontSize: 28, fontWeight: FontWeight.bold))
                     ],
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(fontSize: 13),
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(15, 8, 15, 8),
-                            hintText: 'Search Brands',
+                            hintText: 'Search Outfit Store',
                             border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
@@ -187,7 +187,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_add),
-            label: 'Add Profile',
+            label: 'Store Profile',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.boy_rounded),

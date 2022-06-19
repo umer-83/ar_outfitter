@@ -160,7 +160,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          'Add your service',
+          'Add Store Details',
           style: TextStyle(color: Colors.black),
         ),
         actions: [
@@ -290,8 +290,8 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Colors.blue, width: 2)),
-                                hintText: 'Services Name',
-                                labelText: "Services Name"),
+                                hintText: 'Niche',
+                                labelText: "Niche"),
                           ),
                           TextField(
                             textCapitalization: TextCapitalization.sentences,
@@ -427,7 +427,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_add),
-            label: 'Service Profile',
+            label: 'Store Profile',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.boy_sharp),

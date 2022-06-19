@@ -82,7 +82,7 @@ class _AdvancedTilePageState extends State<AdvancedTilePage> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.person_add),
-                  label: 'Add Profile',
+                  label: 'Store Profile',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.boy_rounded),
