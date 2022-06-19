@@ -33,8 +33,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   children: [
                     Image(
                       image: AssetImage('images/ARBOA-logos_transparent.png'),
-                      width: 200,
-                      height: 200,
+                      width: 100,
+                      height: 100,
                     ),
                     SizedBox(
                       width: 15,
@@ -51,7 +51,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     children: [
                       TextFormField(
                         controller: _userNameTextController,
-                        obscureText: false ,
+                        obscureText: false,
                         enableSuggestions: !false,
                         autocorrect: !false,
                         style: TextStyle(fontSize: 14),
@@ -80,7 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       TextFormField(
                         controller: _emailTextController,
-                        obscureText: false ,
+                        obscureText: false,
                         enableSuggestions: !false,
                         autocorrect: !false,
                         style: TextStyle(fontSize: 14),
@@ -113,7 +113,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         enableSuggestions: !true,
                         autocorrect: !true,
                         style: TextStyle(fontSize: 14),
-                        
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                                 borderRadius:
@@ -140,18 +139,18 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: 45,
                         child: ElevatedButton(
                             onPressed: () {
-                               FirebaseAuth.instance
-                      .createUserWithEmailAndPassword(
-                          email: _emailTextController.text,
-                          password: _passwordTextController.text).then((value) {
-                    print("Created New Account");
-                    FocusScope.of(context).unfocus();
-                    Navigator.pushReplacementNamed(context, '/home');
-                  }).onError((error, stackTrace) {
-                    print("Error ${error.toString()}");
-                     });
-
-                             
+                              FirebaseAuth.instance
+                                  .createUserWithEmailAndPassword(
+                                      email: _emailTextController.text,
+                                      password: _passwordTextController.text)
+                                  .then((value) {
+                                print("Created New Account");
+                                FocusScope.of(context).unfocus();
+                                Navigator.pushReplacementNamed(
+                                    context, '/home');
+                              }).onError((error, stackTrace) {
+                                print("Error ${error.toString()}");
+                              });
                             },
                             child: Text("Register"),
                             style: ButtonStyle(
