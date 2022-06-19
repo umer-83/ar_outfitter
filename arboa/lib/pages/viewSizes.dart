@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
@@ -33,45 +32,51 @@ class _AdvancedTilePageState extends State<AdvancedTilePage> {
             a['id'] = document.id;
           }).toList();
           return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
+            appBar: AppBar(
+              backgroundColor: Colors.white,
               title: Text(
                 "Sizes Detail",
                 style: TextStyle(color: Colors.black),
               ),
               centerTitle: true,
-      ),
-      body: ExpandedTileList.builder(
-        itemCount: storedocs.length,
-        
-        itemBuilder: (context, index, controller) {
-          return ExpandedTile(
-            
-            controller:
-                index == 2 ? controller.copyWith(isExpanded: true) : controller,
-            title: Text(storedocs[index]['name'].toString()),
-            
-            content: Container(
-              
-              child: Column(
-                children: [
-                  ListTile(title: Text("Chest: "+ storedocs[index]['chest'].toString())),
-                  ListTile(title: Text("Shoulders: "+ storedocs[index]['shoulder'].toString())),
-                  ListTile(title: Text("Waist: "+ storedocs[index]['waist'].toString())),
-                  ListTile(title: Text("Shirt Length: "+ storedocs[index]['shirt'].toString())),
-                  ListTile(title: Text("Sleeve Length: "+ storedocs[index]['sleeve'].toString())),
-                  ListTile(title: Text("Pant Length: "+ storedocs[index]['pant'].toString())),
-                  
-                 
-                ],
-              ),
             ),
-            
-            );
-            },
+            body: ExpandedTileList.builder(
+              itemCount: storedocs.length,
+              itemBuilder: (context, index, controller) {
+                return ExpandedTile(
+                  controller: index == 2
+                      ? controller.copyWith(isExpanded: true)
+                      : controller,
+                  leading: Icon(Icons.person),
+                  title: Text(storedocs[index]['name'].toString()),
+                  content: Container(
+                    child: Column(
+                      children: [
+                        ListTile(
+                            title: Text("Chest: " +
+                                storedocs[index]['chest'].toString())),
+                        ListTile(
+                            title: Text("Shoulders: " +
+                                storedocs[index]['shoulder'].toString())),
+                        ListTile(
+                            title: Text("Waist: " +
+                                storedocs[index]['waist'].toString())),
+                        ListTile(
+                            title: Text("Shirt Length: " +
+                                storedocs[index]['shirt'].toString())),
+                        ListTile(
+                            title: Text("Sleeve Length: " +
+                                storedocs[index]['sleeve'].toString())),
+                        ListTile(
+                            title: Text("Pant Length: " +
+                                storedocs[index]['pant'].toString())),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
-          
-          bottomNavigationBar: BottomNavigationBar(
+            bottomNavigationBar: BottomNavigationBar(
               currentIndex: 3,
               onTap: onChangeNavigation,
               type: BottomNavigationBarType.fixed,
@@ -99,12 +104,9 @@ class _AdvancedTilePageState extends State<AdvancedTilePage> {
               ],
               selectedItemColor: Colors.blue,
             ),
-    );
+          );
         });
-    
   }
-
-  
 
   void onChangeNavigation(int index) {
     if (index == 0) {
