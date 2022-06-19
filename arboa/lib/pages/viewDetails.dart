@@ -74,7 +74,7 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                           color: Colors.amber,
                         ),
                         direction: Axis.horizontal,
-                        rating: widget.currentItem.rating,
+                        rating: 4.0,
                         unratedColor: Colors.grey.shade300,
                         itemCount: 5,
                         itemSize: 20,

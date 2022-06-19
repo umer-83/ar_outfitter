@@ -5,17 +5,20 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
+  
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xFFFFFFFF),
       body: SafeArea(
@@ -117,9 +120,9 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.pushReplacementNamed(context, '/home' );});
                                 } on FirebaseAuthException catch (e) {
       if(e.message == 'There is no user record corresponding to this identifier. The user may have been deleted.'){
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text( "Invalid e-mail address.")));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text( "Invalid e-mail address."),duration: Duration(seconds: 2),));
       }else if(e.message == 'The password is invalid or the user does not have a password.'){
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text( "Invalid password.")));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text( "Invalid password."),duration: Duration(seconds: 2),));
       }
       print(e.toString());
     }

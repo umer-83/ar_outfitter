@@ -99,7 +99,7 @@ List<Map<String, dynamic>> data = [
 ];
 
 /*class ListOfAllData {
-   late List<ServiceCardData> data;
+  List<ServiceCardData> data;
 
    ListOfAllData();
 
