@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                "Augmented Reality Based Outfitter Application",
+                "AR Based Outfitter Application",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.black,
