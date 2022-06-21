@@ -51,8 +51,8 @@ class _MapScreenPageState extends State<MapScreenPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue,
-          title: Text("Find at your near location"),
+          backgroundColor: Color(0xff1C1C1C),
+          title: Text("Find at your near location", style: TextStyle(color: Colors.white),),
           centerTitle: true,
           elevation: 4,
         ),
@@ -64,7 +64,7 @@ class _MapScreenPageState extends State<MapScreenPage> {
           child: Stack(children: [
             FlutterMap(
               options: MapOptions(
-                center: LatLng(24.8607, 67.0011),
+                center: LatLng(33.6844, 73.0479),
               ),
               layers: [
                 TileLayerOptions(

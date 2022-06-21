@@ -33,49 +33,104 @@ class _AdvancedTilePageState extends State<AdvancedTilePage> {
           }).toList();
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.white,
+              backgroundColor: Color(0xff1C1C1C),
               title: Text(
-                "Sizes Detail",
-                style: TextStyle(color: Colors.black),
+                "Outfit Size Record",
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               centerTitle: true,
+              elevation: 1,
             ),
-            body: ExpandedTileList.builder(
-              itemCount: storedocs.length,
-              itemBuilder: (context, index, controller) {
-                return ExpandedTile(
-                  controller: index == 2
-                      ? controller.copyWith(isExpanded: true)
-                      : controller,
-                  leading: Icon(Icons.person),
-                  title: Text(storedocs[index]['name'].toString()),
-                  content: Container(
-                    child: Column(
-                      children: [
-                        ListTile(
-                            title: Text("Chest: " +
-                                storedocs[index]['chest'].toString())),
-                        ListTile(
-                            title: Text("Shoulders: " +
-                                storedocs[index]['shoulder'].toString())),
-                        ListTile(
-                            title: Text("Waist: " +
-                                storedocs[index]['waist'].toString())),
-                        ListTile(
-                            title: Text("Shirt Length: " +
-                                storedocs[index]['shirt'].toString())),
-                        ListTile(
-                            title: Text("Sleeve Length: " +
-                                storedocs[index]['sleeve'].toString())),
-                        ListTile(
-                            title: Text("Pant Length: " +
-                                storedocs[index]['pant'].toString())),
-                      ],
+            body: Padding(
+              padding: const EdgeInsets.all(8),
+              child: ExpandedTileList.builder(
+                itemCount: storedocs.length,
+                itemBuilder: (context, index, controller) {
+                  return ExpandedTile(
+                    controller: index == 2
+                        ? controller.copyWith(isExpanded: true)
+                        : controller,
+                    leading: Image(
+                        image: AssetImage('images/people.png'),
+                        width: 50,
+                        height: 50),
+                    title: Text(storedocs[index]['name'].toString(), style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                    contentSeperator: 4,
+                    content: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5)),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Chest:",style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold,),),
+                                  Text(storedocs[index]['chest'].toString(),style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),
+                                ],
+                                ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Shoulders:",style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold,),),
+                                  Text(storedocs[index]['shoulder'].toString(),style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),
+                                ],
+                                ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Shirt Length:",style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),),
+                                  Text(storedocs[index]['shirt'].toString(),style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),
+                                ],
+                                ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Sleeve Length:",style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold,),),
+                                  Text(storedocs[index]['sleeve'].toString(),style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),
+                                ],
+                                ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Pent Length:",style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold,),),
+                                  Text(storedocs[index]['pent'].toString(),style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),
+                                ],
+                                ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Pent Waist:",style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold,),),
+                                  Text(storedocs[index]['waist'].toString(),style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),)
+                                ],
+                                ),
+                          ),
+                          SizedBox(height: 10,),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );         
+                       },
+              ),
             ),
+  
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: 3,
               onTap: onChangeNavigation,

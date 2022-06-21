@@ -70,6 +70,7 @@ flutter:
     - images/c3.jpg
     - images/c4.jpg
     - images/c5.jpg
+    - images/people.png
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:

@@ -158,6 +158,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 70,
         backgroundColor: Colors.white,
         title: Text(
           'Add Store Details',
@@ -169,7 +170,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                  height: 35,
+                  height: 45,
                   margin: EdgeInsets.only(right: 10),
                   child: ElevatedButton(
                       onPressed: () {
@@ -177,11 +178,11 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                         OnSave();
                       },
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.blue,
+                          primary: Color(0xff1C1C1C),
                           onPrimary: Colors.grey.shade400,
                           onSurface: Colors.grey.shade50,
                           shadowColor: Colors.white,
-                          padding: EdgeInsets.all(5),
+                          padding: EdgeInsets.all(12),
                           elevation: 0),
                       child: loading
                           ? SizedBox(
