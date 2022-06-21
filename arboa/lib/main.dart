@@ -1,3 +1,4 @@
+import 'package:ar_outfitter/pages/reset.dart';
 import 'package:ar_outfitter/pages/splash_screen.dart';
 import 'package:ar_outfitter/pages/viewSizes.dart';
 import 'package:flutter/material.dart';
@@ -101,6 +102,7 @@ class _RoutesState extends State<Routes> {
             title: 'Augmented Reality Based Outfitter Application',
             data: allData),
         '/size': (context) => ArMeasurementScreen(),
+        '/reset': (context) => ResetScreen(),
         '/details': (context) => AdvancedTilePage(),
         '/addService': (context) => ServiceAddPage(
             initialized: _initialized,

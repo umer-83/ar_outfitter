@@ -139,8 +139,8 @@ class _HomePageState extends State<HomePage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (BuildContext context) =>
-                                              MapScreenPage(
-                                                  callback:
+                                             MapScreenPage(
+                                                 callback:
                                                       callBackToGetLocation)));
                                 },
                               )),

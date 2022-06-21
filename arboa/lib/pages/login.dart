@@ -146,6 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Expanded(
                       child: Column(
+                        
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
@@ -161,6 +162,17 @@ class _LoginPageState extends State<LoginPage> {
                               onTap: () {
                                 Navigator.pushReplacementNamed(
                                     context, '/signup');
+                              },
+                            ),
+                            SizedBox(width: 10),
+                            GestureDetector(
+                              child: Text('Forgot Password?',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.blue)),
+                              onTap: () {
+                                Navigator.pushReplacementNamed(
+                                    context, '/reset');
                               },
                             )
                           ])
