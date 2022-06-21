@@ -81,6 +81,7 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
 
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
+          toolbarHeight: 70,
           backgroundColor: Colors.white,
           title: Text(
             "Sizes",
@@ -92,13 +93,13 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    height: 35,
+                    height: 45,
                     margin: EdgeInsets.only(right: 10),
                     child: ElevatedButton(
                         onPressed: OnAdd,
                         style: ElevatedButton.styleFrom(
-                            primary: Colors.blue,
-                            onPrimary: Colors.grey.shade400,
+                            primary: Color(0xff1C1C1C),
+                            onPrimary: Color(0xff1C1C1C),
                             onSurface: Colors.grey.shade50,
                             shadowColor: Colors.white,
                             padding: EdgeInsets.all(5),

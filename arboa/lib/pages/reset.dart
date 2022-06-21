@@ -60,7 +60,7 @@ class _ResetScreenState extends State<ResetScreen> {
                               ),
                             );
                           }
-                          if (e.message == 'Given String is empty or null') {
+                          if (e.message == 'Given String is empty or null.') {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: const Text("Invalid e-mail address."),
@@ -95,6 +95,15 @@ class _ResetScreenState extends State<ResetScreen> {
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(40.0),
                                   side: BorderSide(color: Colors.blue))))),
+                ),
+                SizedBox(height: 10),
+                GestureDetector(
+                  child: Text('Login here',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, color: Colors.blue)),
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, '/login');
+                  },
                 )
               ],
             ),

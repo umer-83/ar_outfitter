@@ -24,7 +24,7 @@ class _SignUpPageState extends State<SignUpPage> {
           FocusScope.of(context).unfocus();
         },
         child: Padding(
-            padding: EdgeInsetsDirectional.all(15),
+            padding: EdgeInsetsDirectional.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -42,7 +42,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ],
                 ),
                 SizedBox(height: 50),
-                Text('Signup here',
+                Text('Signup here!',
                     style:
                         TextStyle(fontSize: 30, fontWeight: FontWeight.w700)),
                 Padding(
@@ -58,7 +58,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
+                                    BorderRadius.all(Radius.circular(12)),
                                 borderSide:
                                     BorderSide(color: Colors.blue, width: 2)),
                             contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
@@ -66,7 +66,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             prefixIcon: Icon(Icons.person),
                             border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
+                                    BorderRadius.all(Radius.circular(12)),
                                 borderSide:
                                     BorderSide(color: Colors.blue, width: 2))),
                         validator: (value) {
@@ -87,7 +87,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
+                                    BorderRadius.all(Radius.circular(12)),
                                 borderSide:
                                     BorderSide(color: Colors.blue, width: 2)),
                             contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
@@ -95,7 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             prefixIcon: Icon(Icons.mail),
                             border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
+                                    BorderRadius.all(Radius.circular(12)),
                                 borderSide:
                                     BorderSide(color: Colors.blue, width: 2))),
                         validator: (value) {
@@ -116,7 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
+                                    BorderRadius.all(Radius.circular(12)),
                                 borderSide:
                                     BorderSide(color: Colors.blue, width: 2)),
                             contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
@@ -124,7 +124,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             prefixIcon: Icon(Icons.lock),
                             border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
+                                    BorderRadius.all(Radius.circular(12)),
                                 borderSide: BorderSide(
                                     color: Colors.greenAccent, width: 2))),
                         validator: (value) {
@@ -136,7 +136,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       SizedBox(height: 40),
                       SizedBox(
                         width: double.infinity,
-                        height: 45,
+                        height: 50,
                         child: ElevatedButton(
                             onPressed: () {
                               FirebaseAuth.instance
@@ -156,14 +156,14 @@ class _SignUpPageState extends State<SignUpPage> {
                             style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.blue),
+                                        Color(0xff1C1C1C)),
                                 shape: MaterialStateProperty.all(
                                     RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(40.0),
+                                            BorderRadius.circular(12.0),
                                         side:
-                                            BorderSide(color: Colors.blue))))),
-                      )
+                                            BorderSide(color: Color(0xff1C1C1C))))),
+                      ))
                     ],
                   ),
                 ),
