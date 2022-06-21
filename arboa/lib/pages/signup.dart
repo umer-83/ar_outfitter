@@ -33,8 +33,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   children: [
                     Image(
                       image: AssetImage('images/ARBOA-logos_transparent.png'),
-                      width: 100,
-                      height: 100,
+                      width: 180,
+                      height: 180,
                     ),
                     SizedBox(
                       width: 15,

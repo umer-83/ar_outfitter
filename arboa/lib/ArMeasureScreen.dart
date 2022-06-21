@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
@@ -94,6 +93,7 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
               children: [
                 Container(
                     height: 45,
+                    width: 90,
                     margin: EdgeInsets.only(right: 10),
                     child: ElevatedButton(
                         onPressed: OnAdd,
@@ -109,9 +109,10 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
                                 width: 16,
                                 height: 16,
                                 child: CircularProgressIndicator(
+                                  color: Colors.white,
                                   strokeWidth: 2.0,
                                 ))
-                            : Text('Add',
+                            : Text('Add Here!',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w500)))),
@@ -164,8 +165,7 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
 
             _onPlaneTapHandler(transform);
           }),
-          
-                            
+
           //tooltip: 'Increment',
           child: const Icon(Icons.add),
         ),
@@ -323,7 +323,7 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
       context: context,
       isScrollControlled: true,
       builder: (context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -347,95 +347,143 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
                           borderSide:
                               BorderSide(color: Colors.blue, width: 2))),
                 ),
-                SizedBox(height: 6),
-                TextField(
-                  controller: chestController,
-                  style: TextStyle(fontSize: 14),
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide: BorderSide(color: Colors.blue, width: 2)),
-                      contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                      labelText: 'Chest:',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide:
-                              BorderSide(color: Colors.blue, width: 2))),
+                SizedBox(height: 8),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: TextField(
+                        controller: chestController,
+                        style: TextStyle(fontSize: 14),
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2)),
+                            contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                            labelText: 'Chest:',
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2))),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Expanded(
+                      flex: 1,
+                      child: TextField(
+                        controller: shouldersController,
+                        style: TextStyle(fontSize: 14),
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2)),
+                            contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                            labelText: 'Shoulders:',
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2))),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 6),
-                TextField(
-                  controller: shouldersController,
-                  style: TextStyle(fontSize: 14),
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide: BorderSide(color: Colors.blue, width: 2)),
-                      contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                      labelText: 'Shoulders:',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide:
-                              BorderSide(color: Colors.blue, width: 2))),
+                SizedBox(height: 8),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: TextField(
+                        controller: waistController,
+                        style: TextStyle(fontSize: 14),
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2)),
+                            contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                            labelText: 'Waist:',
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2))),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Expanded(
+                      flex: 1,
+                      child: TextField(
+                        controller: shirtController,
+                        style: TextStyle(fontSize: 14),
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2)),
+                            contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                            labelText: 'Shirt Length:',
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2))),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 6),
-                TextField(
-                  controller: waistController,
-                  style: TextStyle(fontSize: 14),
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide: BorderSide(color: Colors.blue, width: 2)),
-                      contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                      labelText: 'Waist:',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide:
-                              BorderSide(color: Colors.blue, width: 2))),
-                ),
-                SizedBox(height: 6),
-                TextField(
-                  controller: shirtController,
-                  style: TextStyle(fontSize: 14),
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide: BorderSide(color: Colors.blue, width: 2)),
-                      contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                      labelText: 'Shirt Length:',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide:
-                              BorderSide(color: Colors.blue, width: 2))),
-                ),
-                SizedBox(height: 6),
-                TextField(
-                  controller: sleeveController,
-                  style: TextStyle(fontSize: 14),
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide: BorderSide(color: Colors.blue, width: 2)),
-                      contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                      labelText: 'Sleeve Length:',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide:
-                              BorderSide(color: Colors.blue, width: 2))),
-                ),
-                SizedBox(height: 6),
-                TextField(
-                  controller: pantController,
-                  style: TextStyle(fontSize: 14),
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide: BorderSide(color: Colors.blue, width: 2)),
-                      contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                      labelText: 'Pant Length:',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide:
-                              BorderSide(color: Colors.blue, width: 2))),
+                SizedBox(height: 8),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: TextField(
+                        controller: sleeveController,
+                        style: TextStyle(fontSize: 14),
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2)),
+                            contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                            labelText: 'Sleeve Length:',
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2))),
+                      ),
+                    ),
+                    SizedBox(width: 5,),
+                    Expanded(
+                      flex: 1,
+                      child: TextField(
+                        controller: pantController,
+                        style: TextStyle(fontSize: 14),
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2)),
+                            contentPadding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                            labelText: 'Pant Length:',
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2))),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 5),
                 ListTile(
@@ -450,8 +498,11 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
                     addUser();
                     clearText();
                   },
-                  leading: Icon(Icons.save),
-                  title: Text('Save'),
+                  leading: Icon(
+                    Icons.save,
+                    size: 40,
+                  ),
+                  title: Text('Save', style: TextStyle(fontSize: 16),),
                   //onTap: (),
                 ),
               ]),
