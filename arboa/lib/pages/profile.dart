@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:ar_outfitter/utils/data.dart';
@@ -150,6 +151,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
     } else if (index == 3) {
       Navigator.pushReplacementNamed(context, '/details');
     } else if (index == 4) {
+      FirebaseAuth.instance.signOut();
       Navigator.pushReplacementNamed(context, '/login');
     }
   }

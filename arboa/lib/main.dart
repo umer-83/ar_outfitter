@@ -1,6 +1,7 @@
 import 'package:ar_outfitter/pages/reset.dart';
 import 'package:ar_outfitter/pages/splash_screen.dart';
 import 'package:ar_outfitter/pages/viewSizes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'ArMeasureScreen.dart';
 import 'package:ar_outfitter/utils/data.dart';
@@ -12,9 +13,8 @@ import 'pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  
   await dotenv.load(fileName: '.env');
-   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -94,7 +94,8 @@ class _RoutesState extends State<Routes> {
         primarySwatch: Colors.green,
         fontFamily: 'Poppins',
       ),
-      initialRoute: '/login',
+      initialRoute:
+          FirebaseAuth.instance.currentUser == null ? '/login' : '/home',
       routes: {
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignUpPage(),

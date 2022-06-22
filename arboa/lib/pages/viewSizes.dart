@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
 
@@ -171,6 +172,7 @@ class _AdvancedTilePageState extends State<AdvancedTilePage> {
     } else if (index == 2) {
       Navigator.pushReplacementNamed(context, '/size');
     } else if (index == 4) {
+      FirebaseAuth.instance.signOut();
       Navigator.pushReplacementNamed(context, '/login');
     }
   }

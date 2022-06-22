@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ar_outfitter/pages/map.dart';
 import 'package:ar_outfitter/pages/mapResponse.dart';
@@ -46,7 +47,8 @@ class _HomePageState extends State<HomePage> {
       Navigator.pushReplacementNamed(context, '/size');
     } else if (index == 3) {
       Navigator.pushReplacementNamed(context, '/details');
-    }else if (index == 4) {
+    } else if (index == 4) {
+      FirebaseAuth.instance.signOut();
       Navigator.pushReplacementNamed(context, '/login');
     }
   }
@@ -139,8 +141,8 @@ class _HomePageState extends State<HomePage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (BuildContext context) =>
-                                             MapScreenPage(
-                                                 callback:
+                                              MapScreenPage(
+                                                  callback:
                                                       callBackToGetLocation)));
                                 },
                               )),
@@ -196,7 +198,8 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.description_outlined),
             label: 'Details',
-          ),BottomNavigationBarItem(
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.logout),
             label: 'Logout',
           ),

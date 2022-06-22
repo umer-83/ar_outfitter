@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
@@ -275,7 +276,7 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
       extrusionDepth: 1,
       materials: [
         ARKitMaterial(
-          diffuse: ARKitMaterialProperty(color: Colors.amberAccent),
+          diffuse: ARKitMaterialProperty(color: Colors.red),
         )
       ],
     );
@@ -311,6 +312,7 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
     } else if (index == 3) {
       Navigator.pushReplacementNamed(context, '/details');
     } else if (index == 4) {
+      FirebaseAuth.instance.signOut();
       Navigator.pushReplacementNamed(context, '/login');
     }
   }
@@ -462,7 +464,9 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
                                     BorderSide(color: Colors.blue, width: 2))),
                       ),
                     ),
-                    SizedBox(width: 5,),
+                    SizedBox(
+                      width: 5,
+                    ),
                     Expanded(
                       flex: 1,
                       child: TextField(
@@ -502,7 +506,10 @@ class _ArMeasurementScreenState extends State<ArMeasurementScreen> {
                     Icons.save,
                     size: 40,
                   ),
-                  title: Text('Save', style: TextStyle(fontSize: 16),),
+                  title: Text(
+                    'Save',
+                    style: TextStyle(fontSize: 16),
+                  ),
                   //onTap: (),
                 ),
               ]),
