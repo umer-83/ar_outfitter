@@ -13,6 +13,7 @@ class _ResetScreenState extends State<ResetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(
         backgroundColor: Color(0xff1C1C1C),
         centerTitle: true,
@@ -56,7 +57,8 @@ class _ResetScreenState extends State<ResetScreen> {
                     onPressed: () async {
                       try {
                         await auth.sendPasswordResetEmail(
-                            email: emailTextController.text);
+                            email: emailTextController.text,
+                            );
                       } on FirebaseAuthException catch (e) {
                         if (e.message ==
                             'There is no user record corresponding to this identifier. The user may have been deleted.') {
@@ -112,6 +114,7 @@ class _ResetScreenState extends State<ResetScreen> {
                             ),
                           );
                         } 
+                          
                         // else {
                         //   Navigator.pushReplacementNamed(context, '/login');
                         // }
