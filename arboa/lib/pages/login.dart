@@ -14,6 +14,26 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TextEditingController passwordTextController = TextEditingController();
   TextEditingController emailTextController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String email, password;
+  bool remember = false;
+  final List<String> errors = [];
+
+// func with named parameter
+  void addError({String error}) {
+    if (!errors.contains(error))
+      setState(() {
+        errors.add(error);
+      });
+  }
+
+  void removeError({String error}) {
+    if (errors.contains(error))
+      setState(() {
+        errors.remove(error);
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,94 +53,151 @@ class _LoginPageState extends State<LoginPage> {
                       image: AssetImage('images/ARBOA-logos_transparent.png'),
                       width: 200,
                       height: 200),
-                  /*SizedBox(
-                        width: ,
-                      ),*/
                 ],
               ),
-              //SizedBox(height: 5),
               Text('Welcome!',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700)),
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 70, 0, 0),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: emailTextController,
-                      obscureText: false,
-                      enableSuggestions: true,
-                      autocorrect: !false,
-                      style: TextStyle(fontSize: 14,),
-                      decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide:
-                                  BorderSide(color: Colors.blue, width: 2)),
-                          contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                          labelText: 'Email',
-                          prefixIcon: Icon(Icons.mail),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide:
-                                  BorderSide(color: Colors.blue, width: 2))),
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Email is required';
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      style: TextStyle(fontSize: 14),
-                      controller: passwordTextController,
-                      obscureText: true,
-                      enableSuggestions: !true,
-                      autocorrect: !true,
-                      decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide:
-                                  BorderSide(color: Colors.blue, width: 2)),
-                          contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                          labelText: 'Password',
-                          prefixIcon: Icon(Icons.lock,),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide:
-                                  BorderSide(color: Colors.blue, width: 2))),
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'Password is required';
-                              }
-                            },
-                    ),
-                    SizedBox(height: 40),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            signin();
-                          },
-                          child: Text(
-                            "Login",
-                            style: TextStyle(color: Colors.white, fontSize: 14),
+                padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                child: Form(
+                  key: _formKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: emailTextController,
+                          obscureText: false,
+                          enableSuggestions: true,
+                          autocorrect: !false,
+                          style: TextStyle(
+                            fontSize: 14,
                           ),
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all<Color>(Color(0xff1C1C1C)),
-                              shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      side: BorderSide(color:Color(0xff1C1C1C)))))),
-                    )
-                  ],
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12)),
+                                  borderSide:
+                                      BorderSide(color: Colors.blue, width: 2)),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(15, 15, 15, 15),
+                              labelText: 'Email',
+                              prefixIcon: Icon(Icons.mail),
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12)),
+                                  borderSide: BorderSide(
+                                      color: Colors.blue, width: 2))),
+                          onSaved: (newValue) => email = newValue,
+                          onChanged: (value) {
+                            if (value.isNotEmpty &&
+                                errors.contains('kEmailNullError')) {
+                              removeError(error: 'kEmailNullError');
+                            }
+                            // else if (emailValidatorRegExp.hasMatch(value)) {
+                            //   removeError(error: 'kInvalidEmailError');
+                            // }
+                            else if (value.isNotEmpty) {
+                              addError(error: 'kInvalidEmailError');
+                              return null;
+                            }
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              addError(error: 'kEmailNullError');
+                              removeError(error: 'kInvalidEmailError');
+                              return 'Email is required!';
+                            } else if (value.isNotEmpty) {
+                              addError(error: 'kInvalidEmailError');
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          style: TextStyle(fontSize: 14),
+                          controller: passwordTextController,
+                          obscureText: true,
+                          enableSuggestions: !true,
+                          autocorrect: !true,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12)),
+                                  borderSide:
+                                      BorderSide(color: Colors.blue, width: 2)),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(15, 15, 15, 15),
+                              labelText: 'Password',
+                              prefixIcon: Icon(
+                                Icons.lock,
+                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12)),
+                                  borderSide: BorderSide(
+                                      color: Colors.blue, width: 2))),
+                          // validator: (value) {
+                          //   if (value == null || value.trim().isEmpty) {
+                          //     return 'Password is required';
+                          //   }
+                          // },
+                          onSaved: (newValue) => password = newValue,
+                          onChanged: (value) {
+                            if (value.isNotEmpty &&
+                                errors.contains('kPassNullError')) {
+                              removeError(error: 'kPassNullError');
+                            } else if (value.length >= 6) {
+                              removeError(error: 'kShortPassError');
+                            }
+                            // In case a user removed some characters below the threshold, show alert
+                            else if (value.length < 6 && value.isNotEmpty) {
+                              addError(error: 'kShortPassError');
+                            }
+                            return null;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              addError(error: 'kPassNullError');
+                              removeError(error: 'kShortPassError');
+                              return 'Password is required!';
+                            } else if (value.length < 6 && value.isNotEmpty) {
+                              addError(error: 'kShortPassError');
+                              return 'Password must be 6 or > 6 digits.';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 40),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState.validate()) {
+                                  signin();
+                                }
+                              },
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Color(0xff1C1C1C)),
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          side: BorderSide(
+                                              color: Color(0xff1C1C1C)))))),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Expanded(
@@ -139,8 +216,10 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.pushReplacementNamed(context, '/signup');
                         },
                       ),
-                      SizedBox(width: 10),
-                      GestureDetector(
+                    ]),
+                    SizedBox(height: 10),
+                    Center(
+                      child: GestureDetector(
                         child: Text('Forgot Password?',
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
@@ -149,7 +228,7 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.pushReplacementNamed(context, '/reset');
                         },
                       ),
-                    ]),
+                    ),
                   ],
                 ),
               ),
@@ -160,58 +239,75 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future signin() async{
+  Future signin() async {
     try {
-     await FirebaseAuth.instance
+      await FirebaseAuth.instance
           .signInWithEmailAndPassword(
               email: emailTextController.text,
               password: passwordTextController.text)
-          .then((value) =>
-        Navigator.pushReplacementNamed(context, '/home'));
+          .then((value) => Navigator.pushReplacementNamed(context, '/home'));
     } on FirebaseAuthException catch (e) {
       if (e.message ==
           'There is no user record corresponding to this identifier. The user may have been deleted.') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Colors.blue,
-          behavior: SnackBarBehavior.floating,
-          elevation: 1,
-          margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
-          content:  Text("Invalid e-mail address.", style: TextStyle(fontSize: 14, color: Colors.white),textAlign: TextAlign.center,),
-          duration: Duration(seconds: 7),
-        ),);
-      }
-      else if (e.message ==
-          'The email address is badly formatted.') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Colors.blue,
-          behavior: SnackBarBehavior.floating,
-          elevation: 1,
-          margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
-          content:  Text("Invalid e-mail Format.", style: TextStyle(fontSize: 14, color: Colors.white),textAlign: TextAlign.center,),
-          duration: Duration(seconds: 7),
-        ),);
-      } 
-      else if (e.message ==
-          'Given String is empty or null.') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Colors.blue,
-          behavior: SnackBarBehavior.floating,
-          elevation: 1,
-          margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
-          content:  Text("Invalid e-mail Format.", style: TextStyle(fontSize: 14, color: Colors.white),textAlign: TextAlign.center,),
-          duration: Duration(seconds: 7),
-        ),);
-      } 
-       else if (e.message ==
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.blue,
+            behavior: SnackBarBehavior.floating,
+            elevation: 1,
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
+            content: Text(
+              "Invalid e-mail address.",
+              style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      } else if (e.message == 'The email address is badly formatted.') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.blue,
+            behavior: SnackBarBehavior.floating,
+            elevation: 1,
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
+            content: Text(
+              "Invalid e-mail Format.",
+              style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      } else if (e.message == 'Given String is empty or null.') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.blue,
+            behavior: SnackBarBehavior.floating,
+            elevation: 1,
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
+            content: Text(
+              "Invalid e-mail Format.",
+              style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      } else if (e.message ==
           'The password is invalid or the user does not have a password.') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Colors.blue,
-          behavior: SnackBarBehavior.floating,
-          elevation: 1,
-          margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
-          content:  Text("Invalid password.", style: TextStyle(fontSize: 14, color: Colors.white) ,textAlign: TextAlign.center,),
-          duration: Duration(seconds: 7),
-        ),
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.blue,
+            behavior: SnackBarBehavior.floating,
+            elevation: 1,
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
+            content: Text(
+              "Invalid password.",
+              style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 5),
+          ),
         );
       }
       print(e.toString());
