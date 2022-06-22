@@ -256,7 +256,7 @@ class _LoginPageState extends State<LoginPage> {
             elevation: 1,
             margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
             content: Text(
-              "Invalid e-mail address.",
+              "No record found.",
               style: TextStyle(fontSize: 14, color: Colors.white),
               textAlign: TextAlign.center,
             ),
@@ -271,7 +271,7 @@ class _LoginPageState extends State<LoginPage> {
             elevation: 1,
             margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
             content: Text(
-              "Invalid e-mail Format.",
+              "Invalid E-mail Format.",
               style: TextStyle(fontSize: 14, color: Colors.white),
               textAlign: TextAlign.center,
             ),

@@ -69,7 +69,7 @@ class _ResetScreenState extends State<ResetScreen> {
                               elevation: 1,
                               margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
                               content: Text(
-                                "Invalid e-mail address.",
+                                "No record found.",
                                 style: TextStyle(
                                     fontSize: 14, color: Colors.white),
                                 textAlign: TextAlign.center,
@@ -87,7 +87,7 @@ class _ResetScreenState extends State<ResetScreen> {
                               elevation: 1,
                               margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
                               content: Text(
-                                "Enter e-mail address.",
+                                "E-mail address is required.",
                                 style: TextStyle(
                                     fontSize: 14, color: Colors.white),
                                 textAlign: TextAlign.center,
@@ -105,7 +105,7 @@ class _ResetScreenState extends State<ResetScreen> {
                               elevation: 1,
                               margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
                               content: Text(
-                                "Invalid e-mail address.",
+                                "Invalid email format!",
                                 style: TextStyle(
                                     fontSize: 14, color: Colors.white),
                                 textAlign: TextAlign.center,
@@ -113,13 +113,13 @@ class _ResetScreenState extends State<ResetScreen> {
                               duration: Duration(seconds: 5),
                             ),
                           );
-                        } 
-                          
+                        }   
                         // else {
                         //   Navigator.pushReplacementNamed(context, '/login');
                         // }
                         print(e.code);
                         print(e.message);
+                        emailTextController.clear();
 // show the snackbar here
                       }
                     },

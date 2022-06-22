@@ -215,7 +215,7 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                                                     OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color: Colors
-                                                                .pinkAccent,
+                                                                .blue,
                                                             width: 2)),
                                                 contentPadding:
                                                     EdgeInsets.fromLTRB(
@@ -223,7 +223,7 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                                                 border: OutlineInputBorder(
                                                     borderSide: BorderSide(
                                                         color:
-                                                            Colors.pinkAccent,
+                                                            Colors.blue,
                                                         width: 2)),
                                                 hintText: 'Write your review',
                                                 labelText: ""),
@@ -242,14 +242,14 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                                                       padding: MaterialStateProperty.all<EdgeInsets>(
                                                           EdgeInsets.all(10)),
                                                       backgroundColor: MaterialStateProperty.all<Color>(
-                                                          Colors.pinkAccent),
+                                                          Colors.blue),
                                                       shape: MaterialStateProperty.all(
                                                           RoundedRectangleBorder(
                                                               borderRadius:
                                                                   BorderRadius.circular(
                                                                       30.0),
                                                               side: BorderSide(
-                                                                  color: Colors.red)))))),
+                                                                  color: Colors.blue)))))),
                                         ],
                                       ),
                                     )),
