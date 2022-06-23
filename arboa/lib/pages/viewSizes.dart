@@ -109,7 +109,7 @@ class _AdvancedTilePageState extends State<AdvancedTilePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text("Pent Length:",style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold,),),
-                                  Text(storedocs[index]['pent'].toString(),style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),
+                                  Text(storedocs[index]['pant'].toString(),style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400,),),
                                 ],
                                 ),
                           ),
